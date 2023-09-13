@@ -1,7 +1,6 @@
-local chekTopListCheckbox = require('nvim-muryp-md.list.chekTopListCheckbox')
-local checked = require('nvim-muryp-md.list.checked')
-local M = {}
-
+local chekTopListCheckbox = require('muryp-checklist.chekTopListCheckbox')
+local checked             = require('muryp-checklist.checked')
+local M                   = {}
 ---this function chekcing bottom cheklist on childern and sibling, and if have childern will be toggle check
 ---@param args {CURRENT_LINE_NUM:number,PARENT_LINE:number,isTobeCheck:boolean,LAST_CONTENT:boolean}
 function M.cekBottomChekbox(args)
@@ -70,10 +69,9 @@ function M.cekBottomChekbox(args)
         if isTobeCheck and (isChildern or isSibling) and isUnChecked then
           return
         end
-        STORE.childernCheck = false
-        PARENT_ROOT_CONTEN  = vim.api.nvim_buf_get_lines(0, PARENT_LINE - 2, PARENT_LINE - 1, true)[1] ---@type string
-        INDENT_ROOT_CHAR    = string.match(STORE.PARENT_CONTEN, '^([ \t]*)') ---@type string
-        local isRoot        = #INDENT_ROOT_CHAR < 1
+        STORE.childernCheck    = false
+        local INDENT_ROOT_CHAR = string.match(STORE.PARENT_CONTEN, '^([ \t]*)') ---@type string
+        local isRoot           = #INDENT_ROOT_CHAR < 1
         if isAction and isTobeUncheck then
           return
         end

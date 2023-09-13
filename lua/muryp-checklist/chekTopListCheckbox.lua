@@ -1,4 +1,4 @@
-local checked = require('nvim-muryp-md.list.checked')
+local checked = require('muryp-checklist.checked')
 
 ---@param PARENT_NUM number
 ---@param isTobeCheck boolean
