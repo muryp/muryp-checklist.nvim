@@ -19,7 +19,5 @@ return function(CONTEN_LINE)
     end
 
     return indent_size
-  else
-    return 0 -- if space and tab not found
   end
 end
