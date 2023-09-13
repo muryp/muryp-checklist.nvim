@@ -1,5 +1,5 @@
-local cekBottomChekbox = require('nvim-muryp-md.list.checkBottomListCheckBox').cekBottomChekbox
-local checked = require('nvim-muryp-md.list.checked')
+local cekBottomChekbox = require('muryp-checklist.checkBottomListCheckBox').cekBottomChekbox
+local checked = require('muryp-checklist.checked')
 
 local M = {}
 M.toggleCheck = function()
@@ -10,6 +10,29 @@ M.toggleCheck = function()
   vim.api.nvim_buf_set_lines(0, line_number - 1, line_number, true, { NEW_CONTENT })
   cekBottomChekbox({ isTobeCheck = isChecked, CURRENT_LINE_NUM = line_number })
 end
+M.isActive = false
+M.toggleActive = function ()
+end
+
+M.active = function ()
+end
+
+M.nonactive = function ()
+end
+
+M.setup = function(opts)
+  if opts.fileType == nil then
+    opts.fileType = { 'markdown', 'text' }
+  end
+  local CURRENT_FILE_TYPE = vim.bo.filetype
+  for _, val in pairs(opts.fileType) do
+    if val == CURRENT_FILE_TYPE then
+      M.active()
+    end
+  end
+
+end
+
 
 -- M.next_bullet = function()
 --   local line = vim.api.nvim_get_current_line()
