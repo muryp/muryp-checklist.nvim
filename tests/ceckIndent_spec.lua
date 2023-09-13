@@ -6,7 +6,6 @@ local ListTest = {
 }
 
 for typeMode, opts in pairs(ListTest) do
--- local typeMode = 'space'
   describe('cek indent with ' .. typeMode .. ' on ', function()
     vim.cmd('e! ./example/indent.txt')
     opts()
