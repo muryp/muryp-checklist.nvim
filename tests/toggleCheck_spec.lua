@@ -64,11 +64,11 @@ describe('Toggle checkbox on ', function()
   end)
   it('line : 2', function()
     local CONTENT_BEFORE = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    CONTENT_BEFORE[2] = '- [x] Task 2'
+    CONTENT_BEFORE[2] = '- [x] Task 2 :'
     CONTENT_BEFORE[3] = '  - [x] Subtask 1'
-    CONTENT_BEFORE[4] = '  - [x] Subtask 2'
+    CONTENT_BEFORE[4] = '  - [x] Subtask 2 :'
     CONTENT_BEFORE[5] = '    - [x] Sub-subtask 1'
-    CONTENT_BEFORE[6] = '    - [x] Sub-subtask 2'
+    CONTENT_BEFORE[6] = '    - [x] Sub-subtask 2 :'
     CONTENT_BEFORE[7] = '      - [x] SUB-Sub-subtask 1'
     CONTENT_BEFORE[8] = '      - [x] SUB-Sub-subtask 2'
     CONTENT_BEFORE = table.concat(CONTENT_BEFORE, "\n") ---@type string
@@ -82,11 +82,11 @@ describe('Toggle checkbox on ', function()
   end)
   it('line : 6', function()
     local CONTENT_BEFORE = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    CONTENT_BEFORE[2] = '- [ ] Task 2'
+    CONTENT_BEFORE[2] = '- [ ] Task 2 :'
     CONTENT_BEFORE[3] = '  - [x] Subtask 1'
-    CONTENT_BEFORE[4] = '  - [ ] Subtask 2'
+    CONTENT_BEFORE[4] = '  - [ ] Subtask 2 :'
     CONTENT_BEFORE[5] = '    - [x] Sub-subtask 1'
-    CONTENT_BEFORE[6] = '    - [ ] Sub-subtask 2'
+    CONTENT_BEFORE[6] = '    - [ ] Sub-subtask 2 :'
     CONTENT_BEFORE[7] = '      - [ ] SUB-Sub-subtask 1'
     CONTENT_BEFORE[8] = '      - [ ] SUB-Sub-subtask 2'
     CONTENT_BEFORE = table.concat(CONTENT_BEFORE, "\n") ---@type string
@@ -100,11 +100,11 @@ describe('Toggle checkbox on ', function()
   end)
   it('line : 7 and 8', function()
     local CONTENT_BEFORE = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    CONTENT_BEFORE[2] = '- [x] Task 2'
+    CONTENT_BEFORE[2] = '- [x] Task 2 :'
     CONTENT_BEFORE[3] = '  - [x] Subtask 1'
-    CONTENT_BEFORE[4] = '  - [x] Subtask 2'
+    CONTENT_BEFORE[4] = '  - [x] Subtask 2 :'
     CONTENT_BEFORE[5] = '    - [x] Sub-subtask 1'
-    CONTENT_BEFORE[6] = '    - [x] Sub-subtask 2'
+    CONTENT_BEFORE[6] = '    - [x] Sub-subtask 2 :'
     CONTENT_BEFORE[7] = '      - [x] SUB-Sub-subtask 1'
     CONTENT_BEFORE[8] = '      - [x] SUB-Sub-subtask 2'
     CONTENT_BEFORE = table.concat(CONTENT_BEFORE, "\n") ---@type string

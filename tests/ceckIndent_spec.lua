@@ -13,7 +13,7 @@ for typeMode, opts in pairs(ListTest) do
     local CONTENT = vim.api.nvim_buf_get_lines(0, 0, -1, false) ---@type string[]
     for i = 1, 5, 1 do
       it('line : ' .. i, function()
-        local cekLine = cekIndent(CONTENT[i])
+        local cekLine = cekIndent(CONTENT[i]).indent_size
         print('expect : ' .. i - 1)
         print('result : ' .. cekLine)
         if cekLine ~= i - 1 then
