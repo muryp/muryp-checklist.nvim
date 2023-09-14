@@ -15,5 +15,21 @@ _G.tab_opts = function()
   vim.opt.softtabstop = 2
   vim.cmd('%retab!')
 end
+---@param expect string
+---@param result string
+_G.testEqual = function(expect, result)
+  if expect ~= result then
+    print('Expect : ' .. expect)
+    print('result : ' .. result)
+  end
+end
+---@param expect string
+---@param result string
+_G.testNotEqual = function(expect, result)
+  if expect == result then
+    print('Expect : ' .. expect)
+    print('result : ' .. result)
+  end
+end
 require('muryp-checklist').setup()
 _G.space_opts()
