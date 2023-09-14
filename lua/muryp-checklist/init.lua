@@ -1,72 +1,38 @@
 local cekBottomChekbox = require('muryp-checklist.checkBottomListCheckBox').cekBottomChekbox
-local checked = require('muryp-checklist.checked')
+local checked          = require('muryp-checklist.checked')
+local MAPS             = require('muryp-checklist.maps')
 
-local M = {}
-M.toggleCheck = function()
-  local current_line = vim.api.nvim_get_current_line()
-  local line_number = vim.api.nvim_win_get_cursor(0)[1]
+local M                = {}
+M.toggleCheck          = function()
+  local current_line = vim.api.nvim_get_current_line() ---@type string
+  local line_number = vim.api.nvim_win_get_cursor(0)[1] ---@type number
   local isChecked = string.match(current_line, '^%s*%- %[[ ]%].*$')
   local NEW_CONTENT = checked(current_line)
   vim.api.nvim_buf_set_lines(0, line_number - 1, line_number, true, { NEW_CONTENT })
   cekBottomChekbox({ isTobeCheck = isChecked, CURRENT_LINE_NUM = line_number })
 end
-M.isActive = false
-M.toggleActive = function ()
-end
 
-M.active = function ()
-end
-
-M.nonactive = function ()
-end
-
-M.setup = function(opts)
-  if opts.fileType == nil then
-    opts.fileType = { 'markdown', 'text' }
+M.setup                = function(opts)
+  local fileExt = { '*.md', '*.txt' }
+  if opts then
+    fileExt = opts
   end
-  local CURRENT_FILE_TYPE = vim.bo.filetype
-  for _, val in pairs(opts.fileType) do
-    if val == CURRENT_FILE_TYPE then
-      M.active()
+  local currentFileType = string.match(vim.fn.expand('%'), '.*%.(.*)')
+  print(vim.inspect(currentFileType))
+  for _, value in pairs(fileExt) do
+    if value == '*.' .. currentFileType then
+      MAPS()
     end
   end
 
+  vim.api.nvim_create_augroup('muryp-checklist', { clear = true })
+  vim.api.nvim_create_autocmd(
+    { "BufRead", "BufNewFile" }, {
+      pattern = fileExt,
+      callback = function()
+        MAPS()
+      end,
+      group = 'muryp-checklist',
+    })
 end
-
-
--- M.next_bullet = function()
---   local line = vim.api.nvim_get_current_line()
---   local ceckbox = ''
---   if is_list_item(line) then
---     local bullet = string.match(line, "^%s*([%-%*%+]?%s*[0-9]*%.?)%s+.*$")
---     if isCeklist(line) then
---       ceckbox = ' [ ]'
---     end
---     if isListEmpty(line) then
---       if cekLevel() == 0 then
---         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>A<C-u>", true, false, true), "n", true)
---         return
---       end
---       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc><<a", true, false, true), "n", true)
---       return
---     end
---     --- cek is have colon
---     if string.match(line, '^.*:') then
---       local backTofirstBullet = bullet:gsub("%d*", function(num)
---         return tonumber(num) and tostring(1) or ""
---       end)
---       vim.api.nvim_feedkeys('\n' .. backTofirstBullet .. ceckbox .. " ", "n", true)
---       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>>>A", true, false, true), "n", true)
---       return
---     end
---     local next_bullet = bullet:gsub("%d*", function(num)
---       return tonumber(num) and tostring(tonumber(num) + 1) or ""
---     end)
---     --- create emty list/point
---     return vim.api.nvim_feedkeys('\n' .. next_bullet .. ceckbox .. " ", "n", true)
---   end
---   return vim.api.nvim_feedkeys("\n", "n", true)
--- end
-
-
 return M
