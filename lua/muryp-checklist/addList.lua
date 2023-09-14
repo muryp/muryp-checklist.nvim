@@ -61,5 +61,4 @@ return function()
   end
   vim.api.nvim_buf_set_lines(bufnr, LINE_NUMBER, LINE_NUMBER, false, { NEW_INDENT })
   vim.api.nvim_win_set_cursor(0, { LINE_NUMBER + 1, #NEW_INDENT })
-  return
 end
