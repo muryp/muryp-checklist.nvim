@@ -15,5 +15,5 @@ _G.tab_opts = function()
   vim.opt.softtabstop = 2
   vim.cmd('%retab!')
 end
-
+require('muryp-checklist').setup()
 _G.space_opts()
