@@ -14,11 +14,7 @@ for typeMode, opts in pairs(ListTest) do
     for i = 1, 5, 1 do
       it('line : ' .. i, function()
         local cekLine = cekIndent(CONTENT[i]).indent_size
-        print('expect : ' .. i - 1)
-        print('result : ' .. cekLine)
-        if cekLine ~= i - 1 then
-          error('expect : ' .. i - 1 .. ' but get :' .. cekLine)
-        end
+        _G.test(cekLine, i - 1)
       end)
     end
   end)

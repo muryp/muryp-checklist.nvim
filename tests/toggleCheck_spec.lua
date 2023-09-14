@@ -17,9 +17,7 @@ describe('get unchecked parent on ', function()
   for _, val in pairs(testCase) do
     it('line : ' .. val[1], function()
       local result = chekTopListCheckbox(val[1], true)
-      if val[2] ~= result then
-        error('expect : ' .. val[2] .. ' but have : ' .. result)
-      end
+      _G.test(val[2], result)
     end)
   end
 end)
@@ -39,9 +37,7 @@ describe('get checked parent on ', function()
   for _, val in pairs(testCase) do
     it('line : ' .. val[1], function()
       local result = chekTopListCheckbox(val[1], false)
-      if val[2] ~= result then
-        error('expect : ' .. val[2] .. ' but have : ' .. result)
-      end
+      _G.test(val[2], result)
     end)
   end
 end)
@@ -58,9 +54,7 @@ describe('Toggle checkbox on ', function()
     toggleCheckbox()
     local CONTENT_AFTER = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     CONTENT_AFTER = table.concat(CONTENT_AFTER, "\n") ---@type string
-    if CONTENT_AFTER ~= CONTENT_BEFORE then
-      error('not match')
-    end
+    _G.test(CONTENT_AFTER, CONTENT_BEFORE)
   end)
   it('line : 2', function()
     local CONTENT_BEFORE = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -76,9 +70,7 @@ describe('Toggle checkbox on ', function()
     toggleCheckbox()
     local CONTENT_AFTER = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     CONTENT_AFTER = table.concat(CONTENT_AFTER, "\n") ---@type string
-    if CONTENT_AFTER ~= CONTENT_BEFORE then
-      error('not match')
-    end
+    _G.test(CONTENT_AFTER, CONTENT_BEFORE)
   end)
   it('line : 6', function()
     local CONTENT_BEFORE = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -94,9 +86,7 @@ describe('Toggle checkbox on ', function()
     toggleCheckbox()
     local CONTENT_AFTER = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     CONTENT_AFTER = table.concat(CONTENT_AFTER, "\n") ---@type string
-    if CONTENT_AFTER ~= CONTENT_BEFORE then
-      error('not match')
-    end
+    _G.test(CONTENT_AFTER, CONTENT_BEFORE)
   end)
   it('line : 7 and 8', function()
     local CONTENT_BEFORE = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -114,9 +104,7 @@ describe('Toggle checkbox on ', function()
     toggleCheckbox()
     local CONTENT_AFTER = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     CONTENT_AFTER = table.concat(CONTENT_AFTER, "\n") ---@type string
-    if CONTENT_AFTER ~= CONTENT_BEFORE then
-      error('not match')
-    end
+    _G.test(CONTENT_AFTER, CONTENT_BEFORE)
   end)
   it('line : 31', function()
     local CONTENT_BEFORE = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -126,8 +114,6 @@ describe('Toggle checkbox on ', function()
     toggleCheckbox()
     local CONTENT_AFTER = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     CONTENT_AFTER = table.concat(CONTENT_AFTER, "\n") ---@type string
-    if CONTENT_AFTER ~= CONTENT_BEFORE then
-      error('not match')
-    end
+    _G.test(CONTENT_AFTER, CONTENT_BEFORE)
   end)
 end)
