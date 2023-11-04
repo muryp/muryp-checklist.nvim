@@ -11,22 +11,22 @@ return function(CONTEN_LINE)
 
   if indent_char then
     local indent_size
-    if indent_char:match('\t') then
+    if indent_char:match '\t' then
       -- use tab characters
       local tab = indent_char:gsub(' ', '') -- remove space characters
-      indent_size = #tab / softtabstop      -- count result tab / opts tab width
+      indent_size = #tab / softtabstop -- count result tab / opts tab width
       isTab = true
     else
       -- use space
       local spaces = indent_char:gsub('\t', '') -- remove tab characters
-      indent_size = #spaces / shiftwidth        -- count result space / opts space width
+      indent_size = #spaces / shiftwidth -- count result space / opts space width
     end
 
     return {
       indent_size = indent_size,
       shiftwidth = shiftwidth,
       softtabstop = softtabstop,
-      isTab = isTab
+      isTab = isTab,
     }
   end
 end

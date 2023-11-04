@@ -1,4 +1,4 @@
-local cekIndent = require('muryp-checklist.cekIndent')
+local cekIndent = require 'muryp-checklist.cekIndent'
 return function()
   local LINE_NUMBER = vim.api.nvim_win_get_cursor(0)[1]
   local CURRENT_TEXT = vim.api.nvim_get_current_line() ---@type string
@@ -11,9 +11,9 @@ return function()
   local isAddIndent = string.match(CURRENT_TEXT, '^.*:$')
   local isDelIndent = false
   local listMatch = {
-    { '-',         '-' },
+    { '-', '-' },
     { '([%d]*)%.', '' },
-    { '%*',        '*' },
+    { '%*', '*' },
   }
   for _, val in pairs(listMatch) do
     local regex = '^[ \t]*' .. val[1] .. ' '

@@ -1,14 +1,14 @@
 local cekBottomChekbox = require('muryp-checklist.checkBottomListCheckBox').cekBottomChekbox
-local checked          = require('muryp-checklist.checked')
-local MAPS             = require('muryp-checklist.maps')
+local checked = require 'muryp-checklist.checked'
+local MAPS = require 'muryp-checklist.maps'
 
-local M                = {}
-M.toggleCheck          = function()
+local M = {}
+M.toggleCheck = function()
   local current_line = vim.api.nvim_get_current_line() ---@type string
   local line_number = vim.api.nvim_win_get_cursor(0)[1] ---@type number
   local NEW_CONTENT
-  if not current_line:match('^%s*%- %[[ x]%].*$') then
-    if current_line:match('^%s*%- .*$') then
+  if not current_line:match '^%s*%- %[[ x]%].*$' then
+    if current_line:match '^%s*%- .*$' then
       NEW_CONTENT = current_line:gsub('-', '- [ ]', 1)
     else
       NEW_CONTENT = '- [ ] ' .. current_line
@@ -19,19 +19,19 @@ M.toggleCheck          = function()
   local isChecked = string.match(current_line, '^%s*%- %[[ ]%].*$')
   NEW_CONTENT = checked(current_line)
   vim.api.nvim_buf_set_lines(0, line_number - 1, line_number, true, { NEW_CONTENT })
-  cekBottomChekbox({ isTobeCheck = isChecked, CURRENT_LINE_NUM = line_number })
+  cekBottomChekbox { isTobeCheck = isChecked, CURRENT_LINE_NUM = line_number }
 end
-M.map                  = ''
+M.map = ''
 ---@param opts {fileExt?:string[],map?:string}
-M.setup                = function(opts)
-  local fileExt = { '*.md', '*.txt', "COMMIT_EDITMSG" }
+M.setup = function(opts)
+  local fileExt = { '*.md', '*.txt', 'COMMIT_EDITMSG' }
   if opts.fileExt then
     fileExt = opts.fileExt
   end
   if opts.map then
     M.map = opts.map
   end
-  local currentFileType = string.match(vim.fn.expand('%'), '.*%.(.*)')
+  local currentFileType = string.match(vim.fn.expand '%', '.*%.(.*)')
   if currentFileType then
     ---@diagnostic disable-next-line: param-type-mismatch
     for _, value in pairs(fileExt) do
@@ -42,13 +42,12 @@ M.setup                = function(opts)
   end
 
   vim.api.nvim_create_augroup('muryp-checklist', { clear = true })
-  vim.api.nvim_create_autocmd(
-    { "BufRead", "BufNewFile" }, {
-      pattern = fileExt,
-      callback = function()
-        MAPS(M.map)
-      end,
-      group = 'muryp-checklist',
-    })
+  vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = fileExt,
+    callback = function()
+      MAPS(M.map)
+    end,
+    group = 'muryp-checklist',
+  })
 end
 return M
