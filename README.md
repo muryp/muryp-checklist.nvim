@@ -6,6 +6,7 @@
 [![Latest Release](https://img.shields.io/github/release/muryp/muryp-checklist.nvim)](https://github.com/muryp/muryp-checklist.nvim/releases/latest)
 [![Last Commit](https://img.shields.io/github/last-commit/muryp/muryp-checklist.nvim)](https://github.com/muryp/muryp-checklist.nvim/commits/master)
 [![Open Issues](https://img.shields.io/github/issues/muryp/muryp-checklist.nvim)](https://github.com/muryp/muryp-checklist.nvim/issues)
+
 # Plugin Nvim MuryP Git
 easy use git and git issue in nvim, with telescope.
 ## feature
@@ -18,7 +19,11 @@ easy use git and git issue in nvim, with telescope.
 use {
   'muryp/muryp-checklist.nvim',
   config = function()
-    require('muryp-checklist.nvim').setup({})
+    require('muryp-checklist').setup({})
   end
 }
+```
+## setup
+```lua
+require('muryp-checklist').setup({ map = "<leader>'", fileExt = { "*.ext", "*.ext2" } })
 ```
