@@ -11,17 +11,23 @@ M.toggleCheck          = function()
   vim.api.nvim_buf_set_lines(0, line_number - 1, line_number, true, { NEW_CONTENT })
   cekBottomChekbox({ isTobeCheck = isChecked, CURRENT_LINE_NUM = line_number })
 end
-
+M.map                  = ''
+---@param opts {fileExt?:string[],map?:string}
 M.setup                = function(opts)
   local fileExt = { '*.md', '*.txt' }
-  if opts then
-    fileExt = opts
+  if opts.fileExt then
+    fileExt = opts.fileExt
+  end
+  if opts.map then
+    M.map = opts.map
   end
   local currentFileType = string.match(vim.fn.expand('%'), '.*%.(.*)')
-  print(vim.inspect(currentFileType))
-  for _, value in pairs(fileExt) do
-    if value == '*.' .. currentFileType then
-      MAPS()
+  if currentFileType then
+    ---@diagnostic disable-next-line: param-type-mismatch
+    for _, value in pairs(fileExt) do
+      if value == '*.' .. currentFileType then
+        MAPS(M.map)
+      end
     end
   end
 
@@ -30,7 +36,7 @@ M.setup                = function(opts)
     { "BufRead", "BufNewFile" }, {
       pattern = fileExt,
       callback = function()
-        MAPS()
+        MAPS(M.map)
       end,
       group = 'muryp-checklist',
     })

@@ -8,7 +8,14 @@ local function addListMap()
   end
 end
 
-return function()
-  print('exe')
+---@param args string mapping toggle
+return function(args)
   vim.keymap.set("i", "<CR>", addListMap, { buffer = true })
+  if args == '' then
+    return
+  end
+  vim.keymap.set("n", args, function()
+    local toggleCheckbox = require('muryp-checklist').toggleCheck
+    toggleCheckbox()
+  end, { buffer = true })
 end

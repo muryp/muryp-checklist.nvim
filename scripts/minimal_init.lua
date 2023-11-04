@@ -21,5 +21,5 @@ _G.test = function(expect, result)
     print('result : ' .. result)
   end
 end
-require('muryp-checklist').setup()
+require('muryp-checklist').setup({})
 _G.space_opts()
