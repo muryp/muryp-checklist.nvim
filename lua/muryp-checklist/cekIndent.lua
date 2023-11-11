@@ -1,12 +1,13 @@
 ---@param CONTEN_LINE string|nil
 ---@return { indent_size : number, shiftwidth : number, softtabstop : number, isTab : number } | nil
 return function(CONTEN_LINE)
+  local RG = require('muryp-checklist').RG.indent
   local shiftwidth = vim.api.nvim_buf_get_option(0, 'shiftwidth') ---@type number
   local softtabstop = vim.api.nvim_buf_get_option(0, 'softtabstop') / 2 ---@type number
   if CONTEN_LINE == nil then
     CONTEN_LINE = vim.api.nvim_get_current_line() ---@type string
   end
-  local indent_char = string.match(CONTEN_LINE, '^([ \t]*)')
+  local indent_char = string.match(CONTEN_LINE, RG)
   local isTab = false
 
   if indent_char then

@@ -1,5 +1,5 @@
 local isCeklist = function(line)
-  return string.find(line, '^%s*%-[ ]%[[%s|x]%]')
+  return string.find(line, require('muryp-checklist').RG.checklist)
 end
 ---this function for
 ---@param GET_CURRENT_LINE string string line
