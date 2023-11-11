@@ -35,7 +35,7 @@ M.toggleCheck = function()
   vim.api.nvim_buf_set_lines(0, line_number - 1, line_number, true, { NEW_CONTENT })
   cekBottomChekbox { isTobeCheck = isChecked, CURRENT_LINE_NUM = line_number }
 end
-M.map = ''
+M.map = "<leader>'"
 ---@param opts {fileExt?:string[],map?:string}
 M.setup = function(opts)
   local fileExt = { '*.md', '*.txt', 'COMMIT_EDITMSG' }

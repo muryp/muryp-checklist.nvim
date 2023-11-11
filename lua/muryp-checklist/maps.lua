@@ -8,12 +8,6 @@ local function entrInsert()
     return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<CR>', true, false, true), 'n', true)
   end
   if CURRENT_TEXT:match(RG) ~= '' then
-    if CURRENT_TEXT:match '^[ \t]*- %[[ x]%] $' then
-      -- local line_number = vim.api.nvim_win_get_cursor(0)[1] ---@type number
-      -- vim.api.nvim_buf_set_lines(0, line_number - 1, line_number, true, { '' })
-      addList()
-      return
-    end
     if #CURRENT_TEXT > CURRENT_COL then
       local isCheckbox = string.match(CURRENT_TEXT, '^[\t ]?-[ ]%[[%s|x]%]')
       if isCheckbox then
