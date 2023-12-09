@@ -1,13 +1,13 @@
-local cekIndent = require('muryp-checklist.cekIndent')
+local cekIndent = require 'muryp-checklist.cekIndent'
 
 local ListTest = {
   tab = _G.tab_opts,
-  space = _G.space_opts
+  space = _G.space_opts,
 }
 
 for typeMode, opts in pairs(ListTest) do
   describe('cek indent with ' .. typeMode .. ' on ', function()
-    vim.cmd('e! ./example/indent.txt')
+    vim.cmd 'e! ./example/indent.txt'
     opts()
     -- _G.space_opts()
     local CONTENT = vim.api.nvim_buf_get_lines(0, 0, -1, false) ---@type string[]

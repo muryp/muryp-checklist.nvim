@@ -1,6 +1,6 @@
-local addList = require('muryp-checklist.addList')
+local addList = require 'muryp-checklist.addList'
 describe('add List if ', function()
-  vim.cmd('e! test.txt')
+  vim.cmd 'e! test.txt'
   _G.space_opts()
   local bufnr = vim.api.nvim_get_current_buf()
   it('with text, without :', function()
